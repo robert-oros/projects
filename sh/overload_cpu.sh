@@ -1,5 +1,5 @@
-#The let command is used to evaluate arithmetic expressions on shell variables.
 #!/bin/bash
+#The let command is used to evaluate arithmetic expressions on shell variables.
 
 
 while true; do

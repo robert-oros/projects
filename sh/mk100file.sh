@@ -2,4 +2,4 @@
 
 mkdir test
 cd test
-touch {1..100}
+touch {1..10}

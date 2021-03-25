@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in {001..100}
+for i in {009..100}
 do
     # if [[ $i -le 9 ]]
     # then

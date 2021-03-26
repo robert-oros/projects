@@ -3,7 +3,8 @@
 
 i=9-1
 for f in *.txt; do 
-    i=$((i+1))
+    ((i++))
+    
     new="file.txt" 
     
     if [[ $i -le 9 ]]; then # i <= 9: then put 00 before 
@@ -13,9 +14,5 @@ for f in *.txt; do
     else
         mv "$f" " 0$i$new"
     fi
-    
 done
 
-
-# https://linuxhint.com/rename_file_bash/
-# https://www.webservertalk.com/bash-increment-decrement-variable

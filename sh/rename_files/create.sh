@@ -3,15 +3,13 @@
 
 for i in {1..100}
 do  
-    file_name="$i file.txt"
+    f="$i file.txt"
 
-    if [[ $i -le 9 ]]
-    then
-        echo "$i" > "00$file_name"
-    elif [[ $i -le 99 ]]
-    then
-        echo "$i" > "0$file_name"
+    if [[ $i -le 9 ]]; then
+        echo "$i" > "00$f"
+    elif [[ $i -le 99 ]]; then
+        echo "$i" > "0$f"
     else
-        echo "$i" > "$file_name"
+        echo "$i" > "$f"
     fi
 done

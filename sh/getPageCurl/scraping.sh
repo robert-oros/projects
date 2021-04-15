@@ -20,12 +20,12 @@ get_line(){
 }
 
 get_title(){
-  sed -n 's:.*<h3 class="LC20lb DKV0Md">\(.*\)</h3>.*:\1:p' $@ > titles
+  sed -n 's:.*<h3 class="LC20lb DKV0Md">\(.*\)</h3>.*:\1:p' $@ > files
 }
 
 get_link(){
   echo $@
-  # sed -n 's/.*href="([^"]+).*/\1/g' $@ > links
+  sed -n 's/<a href=\([^>]*\).*/\1/' $@ > links
 }
 
 get_html

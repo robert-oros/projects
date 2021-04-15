@@ -1,22 +1,23 @@
 #!/bin/bash
 
-check_if_exist(){
+
+check_utility(){
     tool=$1
 
     if [ $(command -v $tool) ]; then
-        remove_utility $tool
+        remove $tool
         exit 1
     else
-        dowload $tool
+        download $tool
     fi
 }
 
-remove_utility(){
+remove(){
     rm_tool=$1
     
     if [ $(command -v $rm_tool) ]; then
         sudo apt-get remove $rm_tool || sudo rm -r /usr/bin/$rm_tool 
-        dowload $rm_tool
+        download $rm_tool
     fi
 }
 
@@ -24,8 +25,8 @@ remove_utility(){
     # https://github.com/USER/PROJECT/releases/latest/download/package.zip
 # }
 
-dowload(){
-    dowload_tool=$1
+download(){
+    dw_tool=$1
     url='https://github.com/projectdiscovery/nuclei/releases/download/v2.3.4/nuclei_2.3.4_linux_amd64.tar.gz'
 
     cd /home/robert/Downloads/ 
@@ -35,4 +36,4 @@ dowload(){
 }
 
 
-check_if_exist nuclei
+check_utility nuclei

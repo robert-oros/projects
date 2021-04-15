@@ -1,37 +1,38 @@
 #!/bin/bash
 
-check_if_exit(){
+check_if_exist(){
     tool=$1
 
     if [ $(command -v $tool) ]; then
-        echo "exist"
-        remove_tool $tool
+        remove_utility $tool
         exit 1
     else
         dowload $tool
     fi
 }
 
-remove_tool(){
+remove_utility(){
     rm_tool=$1
     
     if [ $(command -v $rm_tool) ]; then
-        echo "exist"
-        sudo apt-get remove $rm_tool
-         
+        sudo apt-get remove $rm_tool || sudo rm -r /usr/bin/$rm_tool 
         dowload $rm_tool
     fi
 }
 
+# get_latest_release(){
+    # https://github.com/USER/PROJECT/releases/latest/download/package.zip
+# }
+
 dowload(){
     dowload_tool=$1
+    url='https://github.com/projectdiscovery/nuclei/releases/download/v2.3.4/nuclei_2.3.4_linux_amd64.tar.gz'
 
-    sudo apt-get install $dowload_tool
-    # mkdir /tmp/tmp_dir
-    # cd /tmp/tmp_dir
-    # curl -sS https://github.com/mirror/wget/archive/refs/tags/v1.21.1.zip > file.zip
-    # unzip file.zip -d /home/robert/Desktop/
+    cd /home/robert/Downloads/ 
+    curl -sS $url # doesn't works 
+    tar -zxvf nuclei_2.3.4_linux_amd64.tar.gz nuclei
+    sudo mv nuclei /usr/bin/
 }
 
 
-check_if_exit wget 
+check_if_exist nuclei

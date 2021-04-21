@@ -21,16 +21,12 @@ remove(){
     fi
 }
 
-# get_latest_release(){
-    # https://github.com/USER/PROJECT/releases/latest/download/package.zip
-# }
-
 download(){
     dw_tool=$1
     url='https://github.com/projectdiscovery/nuclei/releases/download/v2.3.4/nuclei_2.3.4_linux_amd64.tar.gz'
 
     cd /home/robert/Downloads/ 
-    curl -sS $url # doesn't works 
+    wget $url 
     tar -zxvf nuclei_2.3.4_linux_amd64.tar.gz nuclei
     sudo mv nuclei /usr/bin/
 }

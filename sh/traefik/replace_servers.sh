@@ -2,13 +2,13 @@
 
 run_new_servers(){
     servers=$1
-   
+
     while ((i++ < servers)); do
         echo $i
 		if [ "808$i" -gt "8099" ]; then
-			./simple-server -p "80$i" -n "new server $i" & 
+			./simple-server -p 80"$i" -n "newserver$i" & 
 		else
-			./simple-server -p "808$i" -n "new server $i" & 
+			./simple-server -p 808"$i" -n "newserver$i" & 
 		fi
 	done
 }

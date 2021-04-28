@@ -106,8 +106,8 @@ run_servers() {
 		if [ "808$i" -gt "8099" ]; then
 			./simple-server -p "80$i" -n "server $i" & echo $! >> servers_pid
 		# elif [ "808$i" -eq "8088" ]; then # 8088 port is reserved for load balancer
-		# 	p=$((i+1))
-		# 	./simple-server -p "808$p" -n "server $p" & echo $! >> servers_pid
+		# 	i=$((i+1))
+		# 	./simple-server -p "808$i" -n "server $i" & echo $! >> servers_pid
 		else
 			./simple-server -p "808$i" -n "server $i" & echo $! >> servers_pid
 		fi

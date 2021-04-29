@@ -64,7 +64,7 @@ generate_config_files() {
 	cat >traefik.toml <<EOF
 [entryPoints]
   [entryPoints.web]
-  address = ":8088"
+  address = ":8081"
 [api]
   insecure = true
   dashboard = true
@@ -102,23 +102,19 @@ run_servers() {
 
 
 	while ((i++ < services)); do
-
-		
-		if [ "808$i" -le "8099" ]; then # <=
-			echo "808$i" 
-		elif [ "808$i" -gt "8099" ]; then # >
-			echo "80$i" 
-		elif [ "809$i" -gt "8099" ]; then # >
-			echo "8$i" 
-			#./simple-server -p "80$i" -n "server $i" & echo $! >> servers_pid
-			#./simple-server -p "808$i" -n "server $i" & echo $! >> servers_pid
-		# elif [ "808$i" -eq "8088" ]; then # 8088 port is reserved for load balancer
-		# 	i=$((i+1))
-		# 	echo "808$i" >> ports
-			#./simple-server -p "808$i" -n "server $i" & echo $! >> servers_pid
+		if [ "$i" -le "9" ]; then
+			./simple-server -p 808"$i" -n "newserver$i" & echo "$!" >> servers_pid.txt &
+			echo "808$i" > last_port.txt
+		elif [ "$i" -le "99" ]; then
+			./simple-server -p 80"$i" -n "newserver$i" & echo "$!" >> servers_pid.txt &
+			echo "80$i" > last_port.txt
+		elif [ "$i" -ge "100" ]; then
+			./simple-server -p 8"$i" -n "newserver$i" & echo "$!" >> servers_pid.txt &
+			echo "8$i" > last_port.txt
 		fi
 	done
 }
+
 
 run_traefik() {
 	./traefik --configFile=traefik.toml

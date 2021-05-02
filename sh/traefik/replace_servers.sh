@@ -1,22 +1,16 @@
 #!/bin/bash
 
 run_new_servers(){
-    servers=$1
+    server_count=$1
     port=$2
 
     echo "Last port started was $port"
 
-    while ((i++ < servers)); do
-		if [ "$i" -le "9" ]; then
-            echo "808$i"
-            #./simple-server -p 808"$i" -n "newserver$i" & 
-		elif [ "$i" -le "99" ]; then
-            echo "80$i"
-            #./simple-server -p 80"$i" -n "newserver$i" & 
-        else
-            echo "8$i"
-            #./simple-server -p 8"$i" -n "newserver$i" &   
-		fi
+    while ((i++ < server_count)); do
+        port=$((port+1))
+
+        echo $port
+        #./simple-server -p "$port" -n "new$port" & 
 	done
 }
 
@@ -37,6 +31,10 @@ check_last_port(){ # the function is used to see from which port to start new se
     while read line; do
         last_port=$line
     done < $file
+}
+
+generate_toml(){
+    echo "toml"
 }
 
 kill_old_servers(){ # the function kills previously started servers after the process pid

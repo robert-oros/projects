@@ -1,12 +1,12 @@
 #!/bin/bash
 
 run_new_servers(){
-    server_count=$1
+    count=$1
     port=$2
 
     echo "Last port started was $port"
 
-    while ((i++ < server_count)); do
+    while ((i++ < count)); do
         port=$((port+1))
 
         echo $port
@@ -34,7 +34,23 @@ check_last_port(){ # the function is used to see from which port to start new se
 }
 
 generate_toml(){
-    echo "toml"
+    count=$1
+    port=$2
+
+    while ((j++ < count)); do
+        port=$((port+1))
+        echo $port
+        
+        
+        echo "
+        "
+    done
+}
+
+replace_old_toml(){
+    file=$1
+
+    
 }
 
 kill_old_servers(){ # the function kills previously started servers after the process pid
@@ -48,4 +64,6 @@ kill_old_servers(){ # the function kills previously started servers after the pr
 count_previous_ports servers_pid.txt
 check_last_port last_port.txt
 run_new_servers $server_count $last_port
+#generate_toml $server_count $last_port
+#replace_old_toml traefik_dynamic.toml
 #kill_old_servers servers_pid.txt

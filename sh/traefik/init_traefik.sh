@@ -64,7 +64,7 @@ generate_config_files() {
 	cat >traefik.toml <<EOF
 [entryPoints]
   [entryPoints.web]
-  address = ":8081"
+  address = ":8088"
 [api]
   insecure = true
   dashboard = true

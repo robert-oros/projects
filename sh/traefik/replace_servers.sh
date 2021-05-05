@@ -37,19 +37,36 @@ generate_toml(){
     count=$1
     port=$2
 
-    while ((j++ < count)); do
-        port=$((port+1))
-        echo $port
-        
-        
-        echo "
-        "
-    done
+    while ((i++ < count)); do
+		echo -e "\n\t[[http.services.app.weighted.services]]"
+		echo -e "\t\tname = \"app$i"\"
+		echo -e "\t\tweight = 1"
+	done
+
+	while ((j++ < count)); do
+		echo -e "\n\t[http.services.app$j]"
+		echo -e "\t\t[http.services.app$j.loadBalancer]"
+		echo -e "\t\t\t[[http.services.app$j.loadBalancer.servers]]"
+		echo -e "\t\t\t\turl = \"http://127.0.0.1:$port/"\"
+	done
 }
 
 replace_old_toml(){
     file=$1
 
+    cat >$file <<EOF
+[http]
+[http.routers]
+  [http.routers.router0]
+    entryPoints = ["web"]
+    service = "app"
+    rule = "Path(BACKTICK)" 
+[http.services]
+  [http.services.app]
+    $(generate_toml)
+EOF
+
+	sed -i "s|BACKTICK|\`/\`|g" $file
     
 }
 

@@ -25,12 +25,14 @@ kill_server(){
     pid=$1
 
     echo "killl $pid"
+    sudo kill -9 $pid
 }
 
 run_new_server(){
     port=$1
 
     echo "run $port"
+    ./simple-server -p "$port" -n "new$port" & 
 }
 
 switch

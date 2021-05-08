@@ -104,13 +104,13 @@ run_servers() {
 	while ((i++ < services)); do
 		if [ "$i" -le "9" ]; then
 			echo "808$i" > last_port.txt
-			#./simple-server -p "808$i" -n "server$i" & echo "$!" >> servers_pid.txt &
+			./simple-server -p "808$i" -n "server$i" & echo "$!" >> servers_pid.txt &
 		elif [ "$i" -le "99" ]; then
 			echo "80$i" > last_port.txt
-			#./simple-server -p "80$i" -n "server$i" & echo "$!" >> servers_pid.txt &
+			./simple-server -p "80$i" -n "server$i" & echo "$!" >> servers_pid.txt &
 		elif [ "$i" -ge "100" ]; then
 			echo "8$i" > last_port.txt
-			#./simple-server -p "8$i" -n "server$i" & echo "$!" >> servers_pid.txt &
+			./simple-server -p "8$i" -n "server$i" & echo "$!" >> servers_pid.txt &
 		fi
 	done
 }
@@ -125,7 +125,7 @@ if [ $services -ge 1 ]; then
 	#set_ufw_rules
 	#download_traefik
 	generate_config_files
-	run_servers
+	#run_servers
 	#run_traefik
 fi
 

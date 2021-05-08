@@ -1,0 +1,35 @@
+[http]
+[http.routers]
+  [http.routers.router0]
+    entryPoints = ["web"]
+    service = "app"
+    rule = "Path(`/`)" 
+[http.services]
+  [http.services.app]
+    
+	[[http.services.app.weighted.services]]
+		name = "app1"
+		weight = 1
+
+	[[http.services.app.weighted.services]]
+		name = "app2"
+		weight = 1
+
+	[[http.services.app.weighted.services]]
+		name = "app3"
+		weight = 1
+
+	[http.services.app1]
+		[http.services.app1.loadBalancer]
+			[[http.services.app1.loadBalancer.servers]]
+				url = "http://127.0.0.1:8087/"
+
+	[http.services.app2]
+		[http.services.app2.loadBalancer]
+			[[http.services.app2.loadBalancer.servers]]
+				url = "http://127.0.0.1:8088/"
+
+	[http.services.app3]
+		[http.services.app3.loadBalancer]
+			[[http.services.app3.loadBalancer.servers]]
+				url = "http://127.0.0.1:8089/"

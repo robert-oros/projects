@@ -1,0 +1,18 @@
+[entryPoints]
+  [entryPoints.web]
+  address = ":8088"
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
+[log]
+  filePath = "/home/robert/Desktop/traefik_log/traefik.log"
+  format = "json"
+  level = "DEBUG"
+[providers]
+  [providers.file]
+    filename = "traefik_dynamic.toml"
+[accessLog]
+    filePath = "/home/robert/Desktop/traefik_log/access-traefik.log"
+    bufferingSize= 100
+    format = "json"

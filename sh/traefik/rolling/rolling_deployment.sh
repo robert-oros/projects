@@ -1,37 +1,21 @@
 #!/bin/bash
 
-
-
 switch(){
-    while read line && read <&5 line2; do
+    while read line; do
         kill_server $line
-        run_new_server $line2
-    done <servers_pid.txt 5<ports.txt
-    
-    # while read line; do
-    #     port=$line
-    # done < ports.txt
-
-    # while read line; do
-    #     pid=$line
-
-    #     kill_server $pid 
-    #     run_new_server $port
-    # done < servers_pid.txt
+        run_new_server $line
+    done <ports.txt
 }
 
-
 kill_server(){
-    pid=$1
+    port=$1
 
-    echo "killl $pid"
-    sudo kill -9 $pid
+    kill_server_by_port=`sudo kill -9 $(sudo lsof -t -i:$port)`
+    $kill_procces_by_port
 }
 
 run_new_server(){
     port=$1
-
-    echo "run $port"
     ./simple-server -p "$port" -n "new$port" & 
 }
 

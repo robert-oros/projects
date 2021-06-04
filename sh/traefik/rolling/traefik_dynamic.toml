@@ -19,6 +19,10 @@
 		name = "app3"
 		weight = 1
 
+	[[http.services.app.weighted.services]]
+		name = "app4"
+		weight = 1
+
 	[http.services.app1]
 		[http.services.app1.loadBalancer]
 			[[http.services.app1.loadBalancer.servers]]
@@ -33,3 +37,8 @@
 		[http.services.app3.loadBalancer]
 			[[http.services.app3.loadBalancer.servers]]
 				url = "http://127.0.0.1:8083/"
+
+	[http.services.app4]
+		[http.services.app4.loadBalancer]
+			[[http.services.app4.loadBalancer.servers]]
+				url = "http://127.0.0.1:8084/"

@@ -7,6 +7,7 @@ struct Node {
 	struct Node* prev;
 };
 
+
 void push(struct Node** head_ref, int new_data){
 	struct Node* new_node = malloc(sizeof(struct Node));
 
@@ -28,9 +29,9 @@ void append(struct Node** head_ref, int new_data){
     new_node->data = new_data;
     new_node->next = NULL;
 	
-    if (last_node == NULL) {
+    if (*head_ref == NULL) {
         new_node->prev = NULL;
-        last_node = new_node;
+        *head_ref = new_node;
         return;
     }
  
@@ -45,15 +46,13 @@ void append(struct Node** head_ref, int new_data){
 
 
 void deleteNode(struct Node** head_ref, struct Node* target){
-	struct Node* node = *head_ref;
-
 	//^ base case */
-	if (node == NULL || target == NULL)
+	if (*head_ref == NULL || target == NULL)
 		return;
 
 	//^ If node to be deleted is head node 
-	if (node == target)
-		node = target->next;
+	if (*head_ref == target)
+		*head_ref = target->next;
 
 	//^ Change next only if node to be deleted is NOT the last node 
 	if (target->next != NULL)
@@ -65,7 +64,7 @@ void deleteNode(struct Node** head_ref, struct Node* target){
 
 	//^ Finally, free the memory occupied by del
 	free(target);
-	printf("Modified Linked list -> "), printList(node), printf("\n");
+	printf("Modified Linked list -> "), printList(*head_ref), printf("\n");
 	return;
 }
 

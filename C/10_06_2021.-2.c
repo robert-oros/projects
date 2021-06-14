@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+// Create a recursive function that is called 5 times,and then  
+//call another function that goes on the stack and print from which
+//adrress to which adrress is each frame.
+
 int count=1;
 
 int check_stack_frame(){

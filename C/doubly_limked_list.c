@@ -77,7 +77,7 @@ void printList(struct Node* node){
 }
 
 int main(){
-	struct Node* head = NULL; 
+	struct Node* head = NULL; //^ start with the empty list
 
 	push(&head, 2);
 	push(&head, 4);

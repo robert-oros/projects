@@ -11,7 +11,7 @@ int check_stack_frame(){
     int *s=start;
 
     for(int i=0; i<500; i++){
-        printf("%d %d\n", s++, s[i]);
+        printf("%ld->%ld\n", s++, s[i]);
     }
 }
 

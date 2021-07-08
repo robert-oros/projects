@@ -1,16 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 
+int main(){
+    char* str = "maine ploua mult";
 
-int help(){
-    printf("%s", "Help Function");
-}
+    char first = strtok(*str, " ");
+    printf("%s", first);
 
-int main(int argc, char *argv[]){
-    for(int i=1; i<argc; i++){
+    char second = strtok(NULL, " ");
+    printf("%s", second);
 
-        if(strcmp(argv[i], "-h") == 0 ){
-            help();
-        } 
-    }
-    
 }

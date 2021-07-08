@@ -1,35 +1,32 @@
 #include <stdio.h>
 
-// Create a recursive function that is called 5 times,and then  
-//call another function that goes on the stack and print from which
-//adrress to which adrress is each frame.
+// Create a recursive function that is called 5 times, and then call another function 
+// that goes on the stack and print from which adrress to which adrress is each frame.
 
-int count=1;
-
-int check_stack_frame(){
-    int start[] = {55555555};
-    int *s=start;
-
-    for(int i=0; i<500; i++){
-        printf("%ld->%ld\n", s++, s[i]);
-    }
+int check_stack_frame(char func_name[], int rsp, int rbp){
+    printf("%s \n    start frame-> %ld\n    end frame-> %ld\n",func_name, &rbp, &rsp);
 }
 
-int recursiveFunc(){
-    printf("recursiveFunc() +%d\n", count);
+int count=1;
+int recursive_func(){
+    int rsp asm("rsp");
+    int rbp asm("rbp");
 
     while (count++ < 5){
-        recursiveFunc();
+        recursive_func();
 
-        if ((count++)-1 == 5){ 
-            printf("check_stack_frame()\n"), check_stack_frame(); 
+        if ((count++)-1 == 5){
+            check_stack_frame("recursive_func()",rsp, rbp); 
         }
         break;
-    }
-
-  
+    }  
 }
 
 int main(){    
-    recursiveFunc();
+    int rsp asm("rsp");
+    int rbp asm("rbp");
+
+    check_stack_frame("main()",rsp, rbp);
+
+    recursive_func();
 }
